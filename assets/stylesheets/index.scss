@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.game-container {
+  width: 100%;
+
+  .game-board {
+    width: 50%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+
+    .cell {
+      width: 33%;
+      height: 200px;
+      border: 1px solid black;
+    }
+  }
+} 

@@ -1,4 +1,7 @@
 const boardContainer = document.getElementById('game-board');
+const mainController = document.getElementById('main-controller');
+
+const board = ['X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X'];
 
 const player = (name, score) => {
   const getName = () => name;
@@ -8,8 +11,6 @@ const player = (name, score) => {
 };
 
 const gameBoard = (() => {
-  const board = ['X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X'];
-
   const display = () => {
     boardContainer.innerHTML = '';
 
@@ -25,4 +26,30 @@ const gameBoard = (() => {
   return { display };
 })();
 
+const displayController = (() => {
+  const start = () => {
+    mainController.innerHTML = '';
+
+    const startBtn = `
+    <div class="start-btn btn1">start</div>
+    `;
+
+    mainController.innerHTML = startBtn;
+  };
+
+  const gameOver = () => {
+    mainController.innerHTML = '';
+
+    const gameOverBtns = `
+    <div class="new-btn btn1">new game</div>
+    <div class="quit-btn btn1">quit</div>
+    `;
+
+    mainController.innerHTML = gameOverBtns;
+  };
+
+  return { start, gameOver };
+})();
+
 gameBoard.display();
+displayController.start();

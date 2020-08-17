@@ -9,20 +9,46 @@
   display: flex;
 }
 
+.w-50 {
+  width: 50%;
+}
+
+.m-auto {
+  margin: 0 auto;
+}
+
 .game-container {
   width: 100%;
 }
 
 .game-container .game-board {
-  width: 50%;
-  margin: 0 auto;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
 
 .game-container .game-board .cell {
-  width: 33%;
+  width: 33.3%;
   height: 200px;
   border: 1px solid black;
+}
+
+.game-container .main-controller .btn1 {
+  padding: 20px 0;
+  text-transform: uppercase;
+  text-align: center;
+  color: #f1eaea;
+  font-weight: bold;
+}
+
+.game-container .main-controller .start-btn {
+  background-color: #0666d4;
+}
+
+.game-container .main-controller .new-btn {
+  background-color: #19cf47;
+}
+
+.game-container .main-controller .quit-btn {
+  background-color: #db1a0d;
 }
 /*# sourceMappingURL=index.css.map */

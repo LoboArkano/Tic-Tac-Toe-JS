@@ -6,18 +6,46 @@
   display: flex;
 }
 
+.w-50 {
+  width: 50%;
+}
+
+.m-auto {
+  margin: 0 auto;
+}
+
 .game-container {
   width: 100%;
 
   .game-board {
-    width: 50%;
-    margin: 0 auto;
     flex-wrap: wrap;
 
     .cell {
-      width: 33%;
+      width: 33.3%;
       height: 200px;
       border: 1px solid black;
     }
   }
-} 
+
+  .main-controller {
+    .btn1 {
+      padding: 20px 0;
+      text-transform: uppercase;
+      text-align: center;
+      color: rgb(241, 234, 234);
+      font-weight: bold;
+    }
+
+    .start-btn {
+      background-color: rgb(6, 102, 212);
+    }
+
+    .new-btn {
+      background-color: rgb(25, 207, 71);
+    }
+
+    .quit-btn {
+      background-color: rgb(219, 26, 13);
+    }
+  }
+}

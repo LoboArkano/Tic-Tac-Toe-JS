@@ -1,29 +1,53 @@
+/* eslint-disable prefer-destructuring */
 const boardContainer = document.getElementById('game-board');
 const mainController = document.getElementById('main-controller');
 
-const board = ['X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X'];
+const board = ['', '', '', '', '', '', '', '', ''];
+const marks = ['X', 'O'];
 
-const player = (name, score) => {
+const player = (name, score, mark) => {
   const getName = () => name;
   const getScore = () => score;
   const updateScore = () => { score += 1; };
-  return { getScore, getName, updateScore };
+  return {
+    mark, getScore, getName, updateScore,
+  };
 };
 
 const gameBoard = (() => {
-  const display = () => {
+  const render = () => {
+    let i = 0;
     boardContainer.innerHTML = '';
 
     board.forEach((cell) => {
       const cellBoard = `
-      <div class="cell" value="${cell}">${cell}</div>
+      <div class="cell" value="${i}">${cell}</div>
       `;
 
+      i += 1;
       boardContainer.innerHTML += cellBoard;
+    });
+
+    const cells = boardContainer.querySelectorAll('.cell');
+    cells.forEach((cell) => {
+      cell.addEventListener('click', () => {
+        const index = cell.getAttribute('value');
+
+        if (cell.innerHTML === '') {
+          board[index] = marks[0];
+          const temp = marks[0];
+          marks[0] = marks[1];
+          marks[1] = temp;
+        } else {
+          alert('This space has been taken');
+        }
+
+        render();
+      });
     });
   };
 
-  return { display };
+  return { render };
 })();
 
 const displayController = (() => {
@@ -51,5 +75,11 @@ const displayController = (() => {
   return { start, gameOver };
 })();
 
-gameBoard.display();
+const playerOne = player('Lobo', 0, 'X');
+const playerTwo = player('Arcano', 0, 'Y');
+
+console.log(playerOne.mark);
+console.log(playerTwo.mark);
+
+gameBoard.render();
 displayController.start();

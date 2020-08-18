@@ -56,7 +56,20 @@ const rules = (() => {
     }
   };
 
-  return { checkWin };
+  const checkDraw = () => {
+    console.log('a');
+    if (board.every(cell => cell !== '')) {
+      console.log('z');
+      boardContainer.innerHTML = '';
+
+      const draw = `
+      <div>Match Finished. It's a draw!!</div>
+      `;
+      boardContainer.innerHTML = draw;
+    }
+  };
+
+  return { checkWin, checkDraw };
 })();
 
 const gameBoard = (() => {
@@ -108,6 +121,7 @@ const gameBoard = (() => {
         updateCell(cell);
         render();
         rules.checkWin();
+        rules.checkDraw();
       });
     });
   };

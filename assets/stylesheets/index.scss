@@ -2,8 +2,28 @@
   box-sizing: border-box;
 }
 
+.blue-bg {
+  background-color: rgb(6, 102, 212);
+}
+
+.red-bg {
+  background-color: rgb(219, 26, 13);
+}
+
+.green-bg {
+  background-color: rgb(25, 207, 71);
+}
+
 .d-flex {
   display: flex;
+}
+
+.d-none {
+  display: none;
+}
+
+.w-100 {
+  width: 100%;
 }
 
 .w-50 {
@@ -12,6 +32,48 @@
 
 .m-auto {
   margin: 0 auto;
+}
+
+.pos-abs {
+  position: absolute;
+}
+
+.btn1 {
+  padding: 20px 0;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgb(241, 234, 234);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-container {
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.267);
+  animation-name: show;
+  animation-duration: 1.5s;
+
+  .form {
+    padding: 25px;
+    background-color: rgb(246, 248, 248);
+    border-radius: 5px;
+    flex-wrap: wrap;
+
+    .user-form {
+      margin-bottom: 25px;
+      font-size: 20px;
+
+      .player {
+        padding-bottom: 10px;
+      }
+
+      .input {
+        margin-top: 10px;
+      }
+    }
+  }
 }
 
 .game-container {
@@ -28,14 +90,6 @@
   }
 
   .main-controller {
-    .btn1 {
-      padding: 20px 0;
-      text-transform: uppercase;
-      text-align: center;
-      color: rgb(241, 234, 234);
-      font-weight: bold;
-    }
-
     .start-btn {
       background-color: rgb(6, 102, 212);
     }
@@ -47,5 +101,17 @@
     .quit-btn {
       background-color: rgb(219, 26, 13);
     }
+  }
+}
+
+@keyframes show {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0;
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, 0.267);
+    opacity: 1;
   }
 }

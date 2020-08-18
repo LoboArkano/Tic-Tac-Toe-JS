@@ -9,6 +9,22 @@
 </head>
 <body>
   <main>
+    <div id="users-form" class="form-container d-none d-flex w-100 pos-abs">
+      <form id="game-form" class="form d-flex w-50">
+        <div class="user-form w-50">
+          <p class="player">Player 1</p>
+          <label class="label">Name:</label><br>
+          <input type="text" id="username1" class="input">
+        </div>
+        <div class="user-form w-50">
+          <p class="player">Player 2</p>
+          <label class="label">Name:</label><br>
+          <input type="text" id="username2" class="input">
+        </div>
+        <div id="ok-form" class="btn1 green-bg w-100">ok</div>
+        <div class="btn1 red-bg w-100" onclick="hideForm()">cancel</div>
+      </form>
+    </div>
     <section class="game-container">
       <div id="game-board" class="game-board d-flex w-50 m-auto">
 

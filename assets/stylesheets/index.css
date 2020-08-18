@@ -3,10 +3,30 @@
           box-sizing: border-box;
 }
 
+.blue-bg {
+  background-color: #0666d4;
+}
+
+.red-bg {
+  background-color: #db1a0d;
+}
+
+.green-bg {
+  background-color: #19cf47;
+}
+
 .d-flex {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.d-none {
+  display: none;
+}
+
+.w-100 {
+  width: 100%;
 }
 
 .w-50 {
@@ -15,6 +35,55 @@
 
 .m-auto {
   margin: 0 auto;
+}
+
+.pos-abs {
+  position: absolute;
+}
+
+.btn1 {
+  padding: 20px 0;
+  text-transform: uppercase;
+  text-align: center;
+  color: #f1eaea;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-container {
+  height: 100vh;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0.267);
+  -webkit-animation-name: show;
+          animation-name: show;
+  -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+}
+
+.form-container .form {
+  padding: 25px;
+  background-color: #f6f8f8;
+  border-radius: 5px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.form-container .form .user-form {
+  margin-bottom: 25px;
+  font-size: 20px;
+}
+
+.form-container .form .user-form .player {
+  padding-bottom: 10px;
+}
+
+.form-container .form .user-form .input {
+  margin-top: 10px;
 }
 
 .game-container {
@@ -32,14 +101,6 @@
   border: 1px solid black;
 }
 
-.game-container .main-controller .btn1 {
-  padding: 20px 0;
-  text-transform: uppercase;
-  text-align: center;
-  color: #f1eaea;
-  font-weight: bold;
-}
-
 .game-container .main-controller .start-btn {
   background-color: #0666d4;
 }
@@ -50,5 +111,27 @@
 
 .game-container .main-controller .quit-btn {
   background-color: #db1a0d;
+}
+
+@-webkit-keyframes show {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0;
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.267);
+    opacity: 1;
+  }
+}
+
+@keyframes show {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0;
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.267);
+    opacity: 1;
+  }
 }
 /*# sourceMappingURL=index.css.map */

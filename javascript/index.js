@@ -8,7 +8,10 @@ const usernNme2 = document.getElementById('username2');
 let players = [];
 
 const board = ['', '', '', '', '', '', '', '', ''];
-const marks = ['X', 'O'];
+const winRows = [
+  ['0', '1', '2'], ['3', '4', '5'], ['6', '7', '8'],
+  ['0', '3', '6'], ['1', '4', '7'], ['2', '5', '8'],
+  ['0', '4', '8'], ['2', '4', '6']];
 
 const player = (name, score, mark) => {
   const getName = () => name;
@@ -19,18 +22,71 @@ const player = (name, score, mark) => {
   };
 };
 
+const rules = (() => {
+  const subset = (pChoices) => {
+    let result = false;
+    winRows.forEach((row) => {
+      if (row.every(num => pChoices.includes(num))) {
+        result = true;
+      }
+    });
+
+    return result;
+  };
+
+  const checkWin = () => {
+    const pChoices = [];
+    const cells = boardContainer.querySelectorAll('.cell');
+
+    cells.forEach((cell) => {
+      if (cell.innerHTML === players[1].mark) {
+        pChoices.push(cell.getAttribute('value'));
+      }
+    });
+
+    const winner = subset(pChoices);
+
+    if (winner) {
+      boardContainer.innerHTML = '';
+
+      const congrulations = `
+      <div>Congrulation ${players[1].getName()}</div>
+      `;
+      boardContainer.innerHTML = congrulations;
+    }
+  };
+
+  return { checkWin };
+})();
+
 const gameBoard = (() => {
+  const nextTurn = () => {
+    const temp = players[0];
+    players[0] = players[1];
+    players[1] = temp;
+  };
+
   const updateCell = (cell) => {
     if (cell.innerHTML === '') {
       const index = cell.getAttribute('value');
 
-      board[index] = marks[0];
-      const temp = marks[0];
-      marks[0] = marks[1];
-      marks[1] = temp;
+      board[index] = players[0].mark;
+      nextTurn();
     } else {
       alert('This space has been taken');
     }
+  };
+
+  const defaultBoard = () => {
+    boardContainer.innerHTML = '';
+
+    board.forEach(() => {
+      const cellBoard = `
+      <div class="cell"></div>
+      `;
+
+      boardContainer.innerHTML += cellBoard;
+    });
   };
 
   const render = () => {
@@ -50,13 +106,42 @@ const gameBoard = (() => {
     cells.forEach((cell) => {
       cell.addEventListener('click', () => {
         updateCell(cell);
-
         render();
+        rules.checkWin();
       });
     });
   };
 
-  return { render };
+  return { render, defaultBoard };
+})();
+
+const displayController = (() => {
+  const reset = () => {
+    mainController.innerHTML = '';
+  };
+
+  const start = () => {
+    reset();
+
+    const startBtn = `
+    <div class="start-btn btn1" onclick="showForm()">start</div>
+    `;
+
+    mainController.innerHTML = startBtn;
+  };
+
+  const gameOver = () => {
+    reset();
+
+    const gameOverBtns = `
+    <div class="new-btn btn1">new game</div>
+    <div class="quit-btn btn1">quit</div>
+    `;
+
+    mainController.innerHTML = gameOverBtns;
+  };
+
+  return { reset, start, gameOver };
 })();
 
 
@@ -68,43 +153,17 @@ function hideForm() {
   form.classList.add('d-none');
 }
 
-const displayController = (() => {
-  const start = () => {
-    mainController.innerHTML = '';
-
-    const startBtn = `
-    <div class="start-btn btn1" onclick="showForm()">start</div>
-    `;
-
-    mainController.innerHTML = startBtn;
-  };
-
-  const gameOver = () => {
-    mainController.innerHTML = '';
-
-    const gameOverBtns = `
-    <div class="new-btn btn1">new game</div>
-    <div class="quit-btn btn1">quit</div>
-    `;
-
-    mainController.innerHTML = gameOverBtns;
-  };
-
-  return { start, gameOver };
-})();
-
 const gameEngine = (() => {
-
-  const getUserData = () => {
-
-  };
-
   const gameOn = () => {
-    gameBoard.render();
+    gameBoard.defaultBoard();
     displayController.start();
   };
 
-  return { gameOn };
+  const matchStart = () => {
+    gameBoard.render();
+  };
+
+  return { gameOn, matchStart };
 })();
 
 submitBtn.addEventListener('click', e => {
@@ -112,15 +171,15 @@ submitBtn.addEventListener('click', e => {
 
   players = [];
   const playerOne = player(usernNme1.value, 0, 'X');
-  const playerTwo = player(usernNme2.value, 0, 'Y');
+  const playerTwo = player(usernNme2.value, 0, 'O');
 
   players.push(playerOne, playerTwo);
-  console.log(players[0].getName());
 
   usernNme1.value = '';
   usernNme2.value = '';
   hideForm();
-  gameBoard.render();
+  displayController.reset();
+  gameEngine.matchStart();
 });
 
 gameEngine.gameOn();

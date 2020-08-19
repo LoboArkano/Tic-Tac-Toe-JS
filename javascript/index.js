@@ -1,3 +1,6 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-use-before-define */
 /* eslint-disable prefer-destructuring */
 const boardContainer = document.getElementById('game-board');
 const mainController = document.getElementById('main-controller');
@@ -7,7 +10,7 @@ const usernNme1 = document.getElementById('username1');
 const usernNme2 = document.getElementById('username2');
 let players = [];
 
-const board = ['', '', '', '', '', '', '', '', ''];
+let board = ['', '', '', '', '', '', '', '', ''];
 const winRows = [
   ['0', '1', '2'], ['3', '4', '5'], ['6', '7', '8'],
   ['0', '3', '6'], ['1', '4', '7'], ['2', '5', '8'],
@@ -21,6 +24,52 @@ const player = (name, score, mark) => {
     mark, getScore, getName, updateScore,
   };
 };
+
+const displayController = (() => {
+  const reset = () => {
+    mainController.innerHTML = '';
+  };
+
+  const start = () => {
+    reset();
+
+    const startBtn = `
+    <div class="start-btn btn1" onclick="showForm()">start</div>
+    `;
+
+    mainController.innerHTML = startBtn;
+  };
+
+  const gameOver = () => {
+    reset();
+
+    const gameOverBtns = `
+    <div id="new-btn" class="new-btn btn1 w-50">new game</div>
+    <div id="quit-btn" class="quit-btn btn1 w-50">quit</div>
+    `;
+
+    mainController.innerHTML = gameOverBtns;
+
+    const newBtn = document.getElementById('new-btn');
+    newBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      board = ['', '', '', '', '', '', '', '', ''];
+      gameEngine.matchStart();
+    });
+
+    const quitBtn = document.getElementById('quit-btn');
+    quitBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      board = ['', '', '', '', '', '', '', '', ''];
+      players = [];
+      gameEngine.gameOn();
+    });
+  };
+
+  return { reset, start, gameOver };
+})();
 
 const rules = (() => {
   const subset = (pChoices) => {
@@ -47,25 +96,32 @@ const rules = (() => {
     const winner = subset(pChoices);
 
     if (winner) {
+      players[1].updateScore();
       boardContainer.innerHTML = '';
 
       const congrulations = `
-      <div>Congrulation ${players[1].getName()}</div>
+      <div>
+        <p>Congrulations ${players[1].getName()}</p>
+        <p>Score ${players[1].getScore()}</p>
+      </div>
       `;
       boardContainer.innerHTML = congrulations;
+      displayController.gameOver();
+      return true;
     }
+
+    return false;
   };
 
   const checkDraw = () => {
-    console.log('a');
     if (board.every(cell => cell !== '')) {
-      console.log('z');
       boardContainer.innerHTML = '';
 
       const draw = `
       <div>Match Finished. It's a draw!!</div>
       `;
       boardContainer.innerHTML = draw;
+      displayController.gameOver();
     }
   };
 
@@ -120,44 +176,15 @@ const gameBoard = (() => {
       cell.addEventListener('click', () => {
         updateCell(cell);
         render();
-        rules.checkWin();
-        rules.checkDraw();
+        if (rules.checkWin() === false) {
+          rules.checkDraw();
+        }
       });
     });
   };
 
   return { render, defaultBoard };
 })();
-
-const displayController = (() => {
-  const reset = () => {
-    mainController.innerHTML = '';
-  };
-
-  const start = () => {
-    reset();
-
-    const startBtn = `
-    <div class="start-btn btn1" onclick="showForm()">start</div>
-    `;
-
-    mainController.innerHTML = startBtn;
-  };
-
-  const gameOver = () => {
-    reset();
-
-    const gameOverBtns = `
-    <div class="new-btn btn1">new game</div>
-    <div class="quit-btn btn1">quit</div>
-    `;
-
-    mainController.innerHTML = gameOverBtns;
-  };
-
-  return { reset, start, gameOver };
-})();
-
 
 function showForm() {
   form.classList.remove('d-none');
@@ -175,6 +202,7 @@ const gameEngine = (() => {
 
   const matchStart = () => {
     gameBoard.render();
+    displayController.reset();
   };
 
   return { gameOn, matchStart };

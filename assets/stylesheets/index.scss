@@ -67,6 +67,14 @@ body {
   color: rgb(255, 255, 255);
 }
 
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
 .form-container {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.267);
@@ -113,6 +121,15 @@ body {
         font-weight: 900;
         font-size: 40px;
         -webkit-text-stroke: 2px rgb(255, 251, 0);
+      }
+
+      .info {
+        height: 300px;
+        flex-wrap: wrap;
+
+        .match-info {
+          font-size: 2.5rem;
+        }
       }
     }
   }

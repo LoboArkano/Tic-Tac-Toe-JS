@@ -100,9 +100,9 @@ const rules = (() => {
       boardContainer.innerHTML = '';
 
       const congrulations = `
-      <div>
-        <p>Congrulations ${players[1].getName()}</p>
-        <p>Score ${players[1].getScore()}</p>
+      <div class="info d-flex justify-center align-center w-100">
+        <p class="match-info w-100">Congratulations ${players[1].getName()} you are the winner!!!</p>
+        <p class="match-info w-100">Score: ${players[1].getScore()}</p>
       </div>
       `;
       boardContainer.innerHTML = congrulations;
@@ -118,7 +118,9 @@ const rules = (() => {
       boardContainer.innerHTML = '';
 
       const draw = `
-      <div>Match Finished. It's a draw!!</div>
+      <div class="info d-flex justify-center align-center w-100">
+        <p class="match-info w-100">Game over. It's a tie!!!</p>
+      </div>
       `;
       boardContainer.innerHTML = draw;
       displayController.gameOver();

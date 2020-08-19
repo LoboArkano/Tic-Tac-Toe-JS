@@ -9,9 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@900&family=Roboto:wght@100;400;900&display=swap" rel="stylesheet"> 
 </head>
 <body>
-  <header>
-    <h1 class="title w-100">Tic Tac Toe</h1>
-  </header>
   <main>
     <div id="users-form" class="form-container d-none d-flex justify-center align-center w-100 pos-abs">
       <form id="game-form" class="form d-flex w-50">
@@ -25,10 +22,13 @@
           <label class="label">Name:</label><br>
           <input type="text" id="username2" class="input">
         </div>
-        <div id="ok-form" class="btn1 green-bg w-100">ok</div>
-        <div class="btn1 red-bg w-100" onclick="hideForm()">cancel</div>
+        <div id="ok-form" class="btn1 w-100 ok-btn">ok</div>
+        <div class="btn1 w-100 cancel-btn" onclick="hideForm()">cancel</div>
       </form>
     </div>
+    <header>
+      <h1 class="title w-100">Tic Tac Toe</h1>
+    </header>
     <section class="game-container">
       <div id="game-board" class="game-board d-flex justify-center w-50 m-auto">
         <div id="board" class="board d-flex"></div>

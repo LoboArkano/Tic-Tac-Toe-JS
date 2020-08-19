@@ -226,20 +226,39 @@ const gameEngine = (() => {
   return { gameOn, matchStart };
 })();
 
+function validateForm() {
+  let message = '';
+
+  if (usernNme1.value.length === 0) {
+    message += 'Write the name of player 1. ';
+  }
+  if (usernNme2.value.length === 0) {
+    message += 'Write the name of player 2.';
+  }
+  if (message.length === 0) {
+    return true;
+  }
+
+  alert(message);
+  return false;
+}
+
 submitBtn.addEventListener('click', e => {
   e.preventDefault();
 
-  players = [];
-  const playerOne = player(usernNme1.value, 0, 'X');
-  const playerTwo = player(usernNme2.value, 0, 'O');
+  if (validateForm()) {
+    players = [];
+    const playerOne = player(usernNme1.value, 0, 'X');
+    const playerTwo = player(usernNme2.value, 0, 'O');
 
-  players.push(playerOne, playerTwo);
+    players.push(playerOne, playerTwo);
 
-  usernNme1.value = '';
-  usernNme2.value = '';
-  hideForm();
-  displayController.reset();
-  gameEngine.matchStart();
+    usernNme1.value = '';
+    usernNme2.value = '';
+    hideForm();
+    displayController.reset();
+    gameEngine.matchStart();
+  }
 });
 
 myAudio.loop = true;

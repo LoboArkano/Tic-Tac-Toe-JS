@@ -1,7 +1,4 @@
-/* eslint-disable no-alert */
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
-/* eslint-disable prefer-destructuring */
 const boardContainer = document.getElementById('board');
 const mainController = document.getElementById('main-controller');
 const userInfo = document.getElementById('user');
@@ -142,8 +139,8 @@ const rules = (() => {
 const gameBoard = (() => {
   const nextTurn = () => {
     const temp = players[0];
-    players[0] = players[1];
-    players[1] = temp;
+    players[0] = players.pop();
+    players.push(temp);
   };
 
   const updateCell = (cell) => {
@@ -153,6 +150,7 @@ const gameBoard = (() => {
       board[index] = players[0].mark;
       nextTurn();
     } else {
+      // eslint-disable-next-line no-alert
       alert('This space has been taken');
     }
   };
@@ -202,6 +200,7 @@ const gameBoard = (() => {
   return { render, defaultBoard };
 })();
 
+// eslint-disable-next-line no-unused-vars
 function showForm() {
   form.classList.remove('d-none');
 }

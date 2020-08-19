@@ -5,6 +5,7 @@
 const boardContainer = document.getElementById('board');
 const mainController = document.getElementById('main-controller');
 const userInfo = document.getElementById('user');
+const score = document.getElementById('score');
 const form = document.getElementById('users-form');
 const submitBtn = document.getElementById('ok-form');
 const usernNme1 = document.getElementById('username1');
@@ -109,6 +110,10 @@ const rules = (() => {
       </div>
       `;
       boardContainer.innerHTML = congrulations;
+      score.innerHTML = `
+        <p>${players[0].getName()} wins: ${players[0].getScore()}</p>
+        <p>${players[1].getName()} wins: ${players[1].getScore()}</p>
+      `;
       displayController.gameOver();
       return true;
     }
@@ -155,6 +160,7 @@ const gameBoard = (() => {
   const defaultBoard = () => {
     boardContainer.innerHTML = '';
     userInfo.innerHTML = '';
+    score.innerHTML = '';
 
     board.forEach(() => {
       const cellBoard = `

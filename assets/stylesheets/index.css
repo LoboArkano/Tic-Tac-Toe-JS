@@ -128,11 +128,19 @@ body {
   width: 100%;
 }
 
-.game-container .user {
+.game-container .user,
+.game-container .score {
   width: 25%;
-  text-align: right;
   font-size: 2rem;
+}
+
+.game-container .user {
+  text-align: right;
   padding-left: 35px;
+}
+
+.game-container .score {
+  text-align: left;
 }
 
 .game-container .game-board {

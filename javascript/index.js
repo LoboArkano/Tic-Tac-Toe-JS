@@ -9,6 +9,7 @@ const form = document.getElementById('users-form');
 const submitBtn = document.getElementById('ok-form');
 const usernNme1 = document.getElementById('username1');
 const usernNme2 = document.getElementById('username2');
+const myAudio = new Audio('assets/music/sw-8bits.mp3');
 let players = [];
 
 let board = ['', '', '', '', '', '', '', '', ''];
@@ -207,11 +208,13 @@ const gameEngine = (() => {
   const gameOn = () => {
     gameBoard.defaultBoard();
     displayController.start();
+    myAudio.pause();
   };
 
   const matchStart = () => {
     gameBoard.render();
     displayController.reset();
+    myAudio.play();
   };
 
   return { gameOn, matchStart };
@@ -233,4 +236,5 @@ submitBtn.addEventListener('click', e => {
   gameEngine.matchStart();
 });
 
+myAudio.loop = true;
 gameEngine.gameOn();

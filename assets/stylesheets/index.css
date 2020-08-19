@@ -1,6 +1,6 @@
 * {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .blue-bg {
@@ -47,14 +47,14 @@
 
 .justify-center {
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .align-center {
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .btn1 {
@@ -88,9 +88,9 @@ body {
   height: 100vh;
   background-color: rgba(255, 255, 255, 0.267);
   -webkit-animation-name: show;
-          animation-name: show;
+  animation-name: show;
   -webkit-animation-duration: 1.2s;
-          animation-duration: 1.2s;
+  animation-duration: 1.2s;
 }
 
 .form-container .form {
@@ -98,7 +98,7 @@ body {
   background-color: black;
   border-radius: 5px;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   border: 1px solid yellow;
 }
 
@@ -150,12 +150,12 @@ body {
 
 .game-container .game-board {
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .game-container .game-board .board {
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   width: 360px;
   margin-bottom: 30px;
 }
@@ -173,7 +173,7 @@ body {
 .game-container .game-board .board .info {
   height: 300px;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .game-container .game-board .board .info .match-info {
@@ -198,6 +198,7 @@ body {
     background-color: rgba(0, 0, 0, 0);
     opacity: 0;
   }
+
   to {
     background-color: rgba(255, 255, 255, 0.267);
     opacity: 1;
@@ -209,9 +210,9 @@ body {
     background-color: rgba(0, 0, 0, 0);
     opacity: 0;
   }
+
   to {
     background-color: rgba(255, 255, 255, 0.267);
     opacity: 1;
   }
 }
-/*# sourceMappingURL=index.css.map */

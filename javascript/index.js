@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
 /* eslint-disable prefer-destructuring */
-const boardContainer = document.getElementById('game-board');
+const boardContainer = document.getElementById('board');
 const mainController = document.getElementById('main-controller');
 const form = document.getElementById('users-form');
 const submitBtn = document.getElementById('ok-form');
@@ -44,8 +44,8 @@ const displayController = (() => {
     reset();
 
     const gameOverBtns = `
-    <div id="new-btn" class="new-btn btn1 w-50">new game</div>
-    <div id="quit-btn" class="quit-btn btn1 w-50">quit</div>
+    <div id="new-btn" class="new-btn btn1 w-100">new game</div>
+    <div id="quit-btn" class="quit-btn btn1 w-100">quit</div>
     `;
 
     mainController.innerHTML = gameOverBtns;
@@ -164,7 +164,7 @@ const gameBoard = (() => {
 
     board.forEach((cell) => {
       const cellBoard = `
-      <div class="cell" value="${i}">${cell}</div>
+      <div class="cell d-flex justify-center align-center black" value="${i}">${cell}</div>
       `;
 
       i += 1;

@@ -6,10 +6,11 @@
   <title>Tic-Tac-Toe Game</title>
   <link rel="stylesheet" href="assets/stylesheets/reset.css">
   <link rel="stylesheet" href="assets/stylesheets/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@900&family=Roboto:wght@100;400;900&display=swap" rel="stylesheet"> 
 </head>
 <body>
   <main>
-    <div id="users-form" class="form-container d-none d-flex w-100 pos-abs">
+    <div id="users-form" class="form-container d-none d-flex justify-center align-center w-100 pos-abs">
       <form id="game-form" class="form d-flex w-50">
         <div class="user-form w-50">
           <p class="player">Player 1</p>
@@ -26,10 +27,10 @@
       </form>
     </div>
     <section class="game-container">
-      <div id="game-board" class="game-board d-flex w-50 m-auto">
-
+      <div id="game-board" class="game-board d-flex justify-center w-50 m-auto">
+        <div id="board" class="board d-flex"></div>
+        <div id="main-controller" class="main-controller w-100 m-auto"></div>
       </div>
-      <div id="main-controller" class="main-controller w-50 m-auto"></div>
     </section>
   </main>
   <script src="javascript/index.js"></script>

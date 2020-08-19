@@ -128,6 +128,13 @@ body {
   width: 100%;
 }
 
+.game-container .user {
+  width: 25%;
+  text-align: right;
+  font-size: 2rem;
+  padding-left: 35px;
+}
+
 .game-container .game-board {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;

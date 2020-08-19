@@ -4,6 +4,7 @@
 /* eslint-disable prefer-destructuring */
 const boardContainer = document.getElementById('board');
 const mainController = document.getElementById('main-controller');
+const userInfo = document.getElementById('user');
 const form = document.getElementById('users-form');
 const submitBtn = document.getElementById('ok-form');
 const usernNme1 = document.getElementById('username1');
@@ -98,6 +99,7 @@ const rules = (() => {
     if (winner) {
       players[1].updateScore();
       boardContainer.innerHTML = '';
+      userInfo.innerHTML = '';
 
       const congrulations = `
       <div class="info d-flex justify-center align-center w-100">
@@ -116,6 +118,7 @@ const rules = (() => {
   const checkDraw = () => {
     if (board.every(cell => cell !== '')) {
       boardContainer.innerHTML = '';
+      userInfo.innerHTML = '';
 
       const draw = `
       <div class="info d-flex justify-center align-center w-100">
@@ -150,6 +153,7 @@ const gameBoard = (() => {
 
   const defaultBoard = () => {
     boardContainer.innerHTML = '';
+    userInfo.innerHTML = '';
 
     board.forEach(() => {
       const cellBoard = `
@@ -163,6 +167,7 @@ const gameBoard = (() => {
   const render = () => {
     let i = 0;
     boardContainer.innerHTML = '';
+    userInfo.innerHTML = '';
 
     board.forEach((cell) => {
       const cellBoard = `
@@ -172,6 +177,8 @@ const gameBoard = (() => {
       i += 1;
       boardContainer.innerHTML += cellBoard;
     });
+
+    userInfo.innerHTML = `${players[0].getName()} is your turn.`;
 
     const cells = boardContainer.querySelectorAll('.cell');
     cells.forEach((cell) => {

@@ -8,6 +8,7 @@ const submitBtn = document.getElementById('ok-form');
 const usernNme1 = document.getElementById('username1');
 const usernNme2 = document.getElementById('username2');
 const myAudio = new Audio('assets/music/sw-8bits.mp3');
+const confirmation = new Audio('assets/music/happy-confirmation.mp3');
 let players = [];
 
 let board = ['', '', '', '', '', '', '', '', ''];
@@ -26,30 +27,7 @@ const player = (name, score, mark) => {
 };
 
 const displayController = (() => {
-  const reset = () => {
-    mainController.innerHTML = '';
-  };
-
-  const start = () => {
-    reset();
-
-    const startBtn = `
-    <div class="start-btn btn1" onclick="showForm()">start</div>
-    `;
-
-    mainController.innerHTML = startBtn;
-  };
-
-  const gameOver = () => {
-    reset();
-
-    const gameOverBtns = `
-    <div id="new-btn" class="new-btn btn1 w-100">new game</div>
-    <div id="quit-btn" class="quit-btn btn1 w-100">quit</div>
-    `;
-
-    mainController.innerHTML = gameOverBtns;
-
+  const gameOverEvent = () => {
     const newBtn = document.getElementById('new-btn');
     newBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -68,12 +46,43 @@ const displayController = (() => {
     });
   };
 
+  const reset = () => {
+    mainController.innerHTML = '';
+  };
+
+  const start = () => {
+    const startBtn = `
+    <div class="start-btn btn1" onclick="showForm()">start</div>
+    `;
+
+    mainController.innerHTML = startBtn;
+  };
+
+  const gameOver = () => {
+    const gameOverBtns = `
+    <div id="new-btn" class="new-btn btn1 w-100">new game</div>
+    <div id="quit-btn" class="quit-btn btn1 w-100">quit</div>
+    `;
+
+    mainController.innerHTML = gameOverBtns;
+    gameOverEvent();
+  };
+
   return { reset, start, gameOver };
 })();
 
 const rules = (() => {
-  const subset = (pChoices) => {
+  const isSubset = () => {
+    const pChoices = [];
+    const cells = boardContainer.querySelectorAll('.cell');
     let result = false;
+
+    cells.forEach((cell) => {
+      if (cell.innerHTML === players[1].mark) {
+        pChoices.push(cell.getAttribute('value'));
+      }
+    });
+
     winRows.forEach((row) => {
       if (row.every(num => pChoices.includes(num))) {
         result = true;
@@ -83,21 +92,13 @@ const rules = (() => {
     return result;
   };
 
+  const isFilled = () => {
+    board.every(cell => cell !== '');
+  };
+
   const checkWin = () => {
-    const pChoices = [];
-    const cells = boardContainer.querySelectorAll('.cell');
-
-    cells.forEach((cell) => {
-      if (cell.innerHTML === players[1].mark) {
-        pChoices.push(cell.getAttribute('value'));
-      }
-    });
-
-    const winner = subset(pChoices);
-
-    if (winner) {
+    if (isSubset()) {
       players[1].updateScore();
-      boardContainer.innerHTML = '';
       userInfo.innerHTML = '';
 
       const congrulations = `
@@ -119,8 +120,7 @@ const rules = (() => {
   };
 
   const checkDraw = () => {
-    if (board.every(cell => cell !== '')) {
-      boardContainer.innerHTML = '';
+    if (isFilled()) {
       userInfo.innerHTML = '';
 
       const draw = `
@@ -138,9 +138,7 @@ const rules = (() => {
 
 const gameBoard = (() => {
   const nextTurn = () => {
-    const temp = players[0];
-    players[0] = players.pop();
-    players.push(temp);
+    players.push(players.shift());
   };
 
   const updateCell = (cell) => {
@@ -153,6 +151,19 @@ const gameBoard = (() => {
       // eslint-disable-next-line no-alert
       alert('This space has been taken');
     }
+  };
+
+  const cellEvent = () => {
+    const cells = boardContainer.querySelectorAll('.cell');
+    cells.forEach((cell) => {
+      cell.addEventListener('click', () => {
+        updateCell(cell);
+        render();
+        if (rules.checkWin() === false) {
+          rules.checkDraw();
+        }
+      });
+    });
   };
 
   const defaultBoard = () => {
@@ -172,7 +183,6 @@ const gameBoard = (() => {
   const render = () => {
     let i = 0;
     boardContainer.innerHTML = '';
-    userInfo.innerHTML = '';
 
     board.forEach((cell) => {
       const cellBoard = `
@@ -184,17 +194,7 @@ const gameBoard = (() => {
     });
 
     userInfo.innerHTML = `${players[0].getName()} is your turn.`;
-
-    const cells = boardContainer.querySelectorAll('.cell');
-    cells.forEach((cell) => {
-      cell.addEventListener('click', () => {
-        updateCell(cell);
-        render();
-        if (rules.checkWin() === false) {
-          rules.checkDraw();
-        }
-      });
-    });
+    cellEvent();
   };
 
   return { render, defaultBoard };
@@ -203,6 +203,7 @@ const gameBoard = (() => {
 // eslint-disable-next-line no-unused-vars
 function showForm() {
   form.classList.remove('d-none');
+  confirmation.play();
 }
 
 function hideForm() {
@@ -238,6 +239,7 @@ function validateForm() {
     return true;
   }
 
+  // eslint-disable-next-line no-alert
   alert(message);
   return false;
 }

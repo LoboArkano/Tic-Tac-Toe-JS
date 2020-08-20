@@ -92,9 +92,7 @@ const rules = (() => {
     return result;
   };
 
-  const isFilled = () => {
-    return board.every(cell => cell !== '');
-  };
+  const isFilled = () => board.every(cell => cell !== '');
 
   const checkWin = () => {
     if (isSubset()) {

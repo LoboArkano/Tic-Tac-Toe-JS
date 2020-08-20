@@ -93,7 +93,7 @@ const rules = (() => {
   };
 
   const isFilled = () => {
-    board.every(cell => cell !== '');
+    return board.every(cell => cell !== '');
   };
 
   const checkWin = () => {

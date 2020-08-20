@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe Game</title>
+  <link rel="stylesheet" href="assets/stylesheets/reset.css">
+  <link rel="stylesheet" href="assets/stylesheets/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@900&family=Roboto:wght@100;400;900&display=swap" rel="stylesheet"> 
+</head>
+<body>
+  <main>
+    <div id="users-form" class="form-container d-none d-flex justify-center align-center w-100 pos-abs">
+      <form id="game-form" class="form d-flex w-50">
+        <div class="user-form w-50">
+          <p class="player">Player 1</p>
+          <label class="label">Name:</label><br>
+          <input type="text" id="username1" class="input">
+        </div>
+        <div class="user-form w-50">
+          <p class="player">Player 2</p>
+          <label class="label">Name:</label><br>
+          <input type="text" id="username2" class="input">
+        </div>
+        <div id="ok-form" class="btn1 w-100 ok-btn">ok</div>
+        <div class="btn1 w-100 cancel-btn" onclick="hideForm()">cancel</div>
+      </form>
+    </div>
+    <header>
+      <h1 class="title w-100">Tic Tac Toe</h1>
+    </header>
+    <section class="game-container d-flex">
+      <div id="user" class="user"></div>
+      <div id="game-board" class="game-board d-flex justify-center w-50">
+        <div id="board" class="board d-flex"></div>
+        <div id="main-controller" class="main-controller w-100 m-auto"></div>
+      </div>
+      <div id="score" class="score"></div>
+    </section>
+  </main>
+  <script src="javascript/index.js"></script>
+</body>
+</html>
